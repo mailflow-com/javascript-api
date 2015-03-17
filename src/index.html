@@ -6,7 +6,24 @@
     <h2>Commands</h2>
     <pre>
       $mailflow.setup('4f4c7009-1b08-4593-90b8-6a0e80d20444');
+
+      // pre-exsisting contact
       $mailflow.contacts('email@mailflow.com').tag(['first tag', 'second tag']);
+
+
+      // new contact
+      $mailflow.contacts('email@mailflow.com', true).tag(['first tag', 'second tag']);
+
+
+      // tag and assign flow
+      $mailflow.contacts('email@mailflow.com').tag(['first tag', 'second tag'], true);
+      
+
+      // delete tag
+      $mailflow.tags(12).delete();
+
+      // untag contact
+      $mailflow.contacts('email@mailflow.com').untag(12);
     </pre>
   </body>
 </html>

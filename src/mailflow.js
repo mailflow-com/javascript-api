@@ -17,7 +17,7 @@ var $mailflow = (function(){
   };
 
   var url = function (location) {
-    return 'http://localhost:3000/' + location;
+    return 'http://localhost:3000/api/' + location;
   };
 
   var _success = function () {};
@@ -45,24 +45,39 @@ var $mailflow = (function(){
     _r.fail(error || _error);
   };
 
+  var parseTags = function (tags) {
+    tags = (tags instanceof Array) ? tags : [tags];
+    var results = [];
+    tags.forEach(function (item) {
+      results.push({name: item});
+    });
+    return results;
+  };  
+
   var object = {
     key: null,
     options: {}
   };
 
-  object.contacts = function (email, create) {
-    var data = {email: email, create_contact: create || false};
+  object.tags = function (tagId) {
+    var data = {id: tagId};
 
     return {
-      tag: function (tags) {
-        
-        tags = (tags instanceof Array) ? tags : [tags];
-        var results = [];
-        tags.forEach(function (item) {
-          results.push({name: item});
-        });
+      delete: function () {
+        return request('delete', 'tags/' + tagId, {});
+      }
+    }
+  };
 
-        request('post', 'api2/tags', j.extend({}, data, {tags: results}));
+  object.contacts = function (email, createContact) {
+    var data = {email: email, create_contact: createContact || false};
+
+    return {
+      tag: function (tags, populateFlow) {
+        return request('post', 'tags', j.extend({}, data, {tags: parseTags(tags), populate_flow: populateFlow}));
+      },
+      untag: function (tagId) {
+        return request('delete', 'tags/' + tagId, data);
       }
     }
   };
