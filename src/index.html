@@ -1,6 +1,6 @@
 <html>
   <head>
-    <script src='mailflow.js'></script>
+    <script src='../dist/mailflow.js'></script>
   </head>
   <body>
     <h2>Commands</h2>
@@ -18,6 +18,9 @@
 
       // untag contact
       $mailflow.contacts('email@mailflow.com').untag(12);
+
+      // list tags
+      $mailflow.tags();
     </pre>
   </body>
 </html>

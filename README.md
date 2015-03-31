@@ -1,10 +1,15 @@
 # Mailflow-js
 Install dependancies
 ```sh
-npm-install
+$ npm-install
 ```
 
-Build dist
+Development
+```sh
+  $ grunt develop
+```
+
+Build distribution (production/prototype/staging/development)
 ```sh
 $ ENV=production grunt
 ```
