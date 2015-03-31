@@ -33,7 +33,7 @@ var $mailflow = (function(){
   };
 
   var request = function (method, location, data, success, error) {
-    data['user_uuid'] = apiKey();
+    data['key'] = apiKey();
     var _r = j.ajax({
       method: method,
       url: url(location),
