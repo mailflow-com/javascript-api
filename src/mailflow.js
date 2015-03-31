@@ -1,4 +1,4 @@
-//version 0.9
+//version 1.0
 
 var $mailflow = (function(){
   var j = jQuery.noConflict();
@@ -65,18 +65,6 @@ var $mailflow = (function(){
     options: {}
   };
 
-  object.tags = function (tagId) {
-    var data = {id: tagId};
-
-    if (!tagId) return request('get', 'tags');
-
-    return {
-      delete: function () {
-        return request('delete', 'tags/' + tagId, {});
-      }
-    }
-  };
-
   object.contacts = function (email, createContact) {
     var data = {email: email, create_contact: false};
 
@@ -84,8 +72,8 @@ var $mailflow = (function(){
       tag: function (tags, populateFlow) {
         return request('post', 'tags', j.extend({}, data, {tags: parseTags(tags), populate_flow: populateFlow}));
       },
-      untag: function (tagId) {
-        return request('delete', 'tags/' + tagId, data);
+      untag: function (tags) {
+        return request('delete', 'tags', j.extend({}, data, {tags: parseTags(tags)}));
       }
     }
   };
