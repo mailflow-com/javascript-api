@@ -1,5 +1,5 @@
-# javascript-api
+# mailflow-js
 
 npm-install
 
-use "grunt" to minimize
+use "ENV=production grunt" to minimize
