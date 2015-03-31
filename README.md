@@ -1,20 +1,36 @@
-# mailflow-js
-
+# Mailflow-js
+Install dependancies
+```sh
 npm-install
+```
 
-use "ENV=production grunt" to minimize
+Build dist
+```sh
+$ ENV=production grunt
+```
 
-
+### Examples
+Setup with mailflow public api key
+```
 $mailflow.setup(*PUBLIC KEY*);
+```
 
-// pre-exsisting contact
+Tag prexsisting contact
+```
 $mailflow.contacts('email@mailflow.com').tag(['first tag', 'second tag']);
+```
 
-// tag and assign flow
+Tag pre-exisiting contact and add to any new flows if applicable
+```
 $mailflow.contacts('email@mailflow.com').tag(['first tag', 'second tag'], true);
+```
 
-// delete tag
+Delete tag from mailflow user 
+```
 $mailflow.tags(12).delete();
+```
 
-// untag contact
+Remove tag from contact
+```
 $mailflow.contacts('email@mailflow.com').untag(12);
+```
