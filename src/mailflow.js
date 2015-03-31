@@ -17,7 +17,7 @@ var $mailflow = (function(){
   };
 
   var url = function (location) {
-    return 'http://localhost:3000/api/' + location;
+    return '@@host/api/' + location;
   };
 
   var _success = function () {};
@@ -70,7 +70,7 @@ var $mailflow = (function(){
   };
 
   object.contacts = function (email, createContact) {
-    var data = {email: email, create_contact: createContact || false};
+    var data = {email: email, create_contact: false};
 
     return {
       tag: function (tags, populateFlow) {

@@ -1,0 +1,6 @@
+{
+  "production": "https://mailflow.com",
+  "prototype":  "https://prototype.mailflow.com",
+  "staging":  "https://staging.mailflow.com",
+  "development": "http://localhost:3000"
+}
