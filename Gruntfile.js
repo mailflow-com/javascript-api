@@ -20,9 +20,13 @@ module.exports = function(grunt) {
       }
     },
     uglify: {
+      options: {
+        mangle: true
+      },
       my_target: {
         files: {
-          'dist/mailflow.min.js': ['dist/mailflow.js']
+          'dist/mailflow.min.js': 'dist/mailflow.js',
+          'dist/snippet.min.js' : 'src/snippet.js'
         }
       }
     },

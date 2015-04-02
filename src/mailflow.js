@@ -61,7 +61,7 @@ var $mailflow = (function(){
   };  
 
   var object = {
-    key: null,
+    key: $mailflow.key || null,
     options: {}
   };
 
