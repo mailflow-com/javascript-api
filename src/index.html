@@ -1,9 +1,7 @@
 <html>
   <head>
-    <!-- <script src='../dist/mailflow.js'></script> -->
     <script>
-!function(a){this.$mailflow={key:a};var b=document.createElement("script");b.type="text/javascript",b.src="http://cdn.mailflow.com/mailflow.min.js",document.getElementsByTagName("head")[0].appendChild(b)}("PUBLIC_KEY");
-
+!function(a){var b=function(a,b){this.$mailflow.cache.push({fn:a,a:b})};this.$mailflow={key:a,cache:[],contacts:function(){return b("contacts",arguments),{tag:function(){b("tag",arguments)},untag:function(){b("untag",arguments)}}}};var c=document.createElement("script");c.type="text/javascript",c.src="../dist/mailflow.js",document.getElementsByTagName("head")[0].appendChild(c)}("-R56WdTGqyKlMbf4ttj8aA");
     </script>
   </head>
   <body>

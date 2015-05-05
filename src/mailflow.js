@@ -1,5 +1,4 @@
-//version 1.0
-
+//version 1.1
 var $mailflow = (function(){
   var j = jQuery.noConflict();
 
@@ -60,9 +59,23 @@ var $mailflow = (function(){
     return results;
   };  
 
+  var key = (this.$mailflow) ? this.$mailflow.key || null : null;
+  var cache = (this.$mailflow) ? this.$mailflow.cache || [] : [];
+
   var object = {
-    key: $mailflow.key || null,
+    key: key,
+    cache: cache,
     options: {}
+  };
+
+  object.catchUp = function () {
+    this.cache.forEach(function(call, index){
+      if (call.fn == 'contacts') {
+        var next = this.cache[index + 1];
+        this[call.fn](call.a[0], call.a[1])[next.fn](next.a[0], next.a[1]);
+        this.cache.splice(index, 2);
+      }
+    }.bind(this));
   };
 
   object.contacts = function (email, createContact) {
@@ -85,3 +98,4 @@ var $mailflow = (function(){
 
   return object;
 })();
+$mailflow.catchUp();
