@@ -1,9 +1,9 @@
-//version 1.1
+//version 1.2
 var $mailflow = (function(){
   var j = jQuery.noConflict();
 
   var apiKey = function () {
-    var key = object.key
+    var key = mailflow.key
     if (key) {
       return key;
     } else {
@@ -29,19 +29,19 @@ var $mailflow = (function(){
 
   var request = function (method, location, data, success, error) {
     data = data || {};
-    data['key'] = apiKey();
+    data['api_key'] = apiKey();
 
-    var object;
+    var requestBody;
     if (method == 'get') {
-      object = j.param(data);
+      requestBody = j.param(data);
     } else {
-      object = JSON.stringify(data);
+      requestBody = JSON.stringify(data);
     }
     
     var _r = j.ajax({
       method: method,
       url: url(location),
-      data: object,
+      data: requestBody,
       crossDomain: true,
       contentType: 'application/json'
     });
@@ -62,13 +62,13 @@ var $mailflow = (function(){
   var key = (this.$mailflow) ? this.$mailflow.key || null : null;
   var cache = (this.$mailflow) ? this.$mailflow.cache || [] : [];
 
-  var object = {
+  var mailflow = {
     key: key,
     cache: cache,
     options: {}
   };
 
-  object.catchUp = function () {
+  mailflow.catchUp = function () {
     this.cache.forEach(function(call, index){
       if (call.fn == 'contacts') {
         var next = this.cache[index + 1];
@@ -78,12 +78,12 @@ var $mailflow = (function(){
     }.bind(this));
   };
 
-  object.contacts = function (email, createContact) {
-    var data = {email: email, create_contact: false};
+  mailflow.contacts = function (email) {
+    var data = {email: email};
 
     return {
-      tag: function (tags, populateFlow) {
-        return request('post', 'tags', j.extend({}, data, {tags: parseTags(tags), populate_flow: populateFlow}));
+      tag: function (tags, trigger) {
+        return request('post', 'tags', j.extend({}, data, {tags: parseTags(tags), trigger: trigger}));
       },
       untag: function (tags) {
         return request('delete', 'tags', j.extend({}, data, {tags: parseTags(tags)}));
@@ -91,11 +91,11 @@ var $mailflow = (function(){
     }
   };
 
-  object.setup = function (key) {
-    object.key = key;
+  mailflow.setup = function (key) {
+    mailflow.key = key;
     return key;
   };
 
-  return object;
+  return mailflow;
 })();
 $mailflow.catchUp();
